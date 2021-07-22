@@ -1,12 +1,23 @@
-.app {
+.header {
   display: flex;
   justify-content: space-between;
   padding: 2rem;
-  align-content: center;
+  padding-top: 3rem;
+}
+
+.hamburger {
+  height: 46px;
+  padding: 2px 2px;
+  border-style: none;
+}
+
+.hamburger:hover {
+  border-style: none;
 }
 
 
 /*
+ANother commetn
 * Skeleton V2.0.4
 * Copyright 2014, Dave Gamache
 * www.getskeleton.com
