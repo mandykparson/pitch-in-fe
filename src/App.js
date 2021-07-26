@@ -22,7 +22,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [loginButtonPopup, setLogInButtonPopup] = useState(false);
   const [signupButtonPopup, setSignUpButtonPopup] = useState(false);
-  const [userId, setUserId] = useState(0)
+  const [user, setUser] = useState({})
 
   const handleToggle = () => {
     setNavbarOpen(prev => !prev)
@@ -39,9 +39,9 @@ function App() {
           {isLoggedIn ? 
             <nav className="navBar">
               <button className="hamburger" onClick={handleToggle}>{navbarOpen ? 
-            (<MdClose style={{ color: "#fff", width: "40px", height: "40px" }} />) : 
-            (<FiMenu style={{ color: "#7b7b7b", width: "40px", height: "40px" }} />
-            )}
+                (<MdClose style={{ color: "#fff", width: "40px", height: "40px" }} />) : 
+                (<FiMenu style={{ color: "#7b7b7b", width: "40px", height: "40px" }} />
+              )}
           </button>
               <ul className={`menuNav ${navbarOpen ? " showMenu" : ""}`}>
                 <li>
@@ -89,8 +89,8 @@ function App() {
                     setLogInButtonPopup={setLogInButtonPopup}
                     isLoggedIn={isLoggedIn}
                     setIsLoggedIn={setIsLoggedIn}
-                    userId={userId}
-                    setUserId={setUserId}/>
+                    user={user}
+                    setUser={setUser}/>
                 <button id="signup" onClick={() => {setSignUpButtonPopup(!signupButtonPopup)}}>Sign Up</button> 
                   <SignUp 
                     trigger={signupButtonPopup} 
@@ -102,22 +102,22 @@ function App() {
             <Switch>
                 <Route exact path="/home">
                     <Homepage 
-                      userId={userId}
+                      user={user}
                     />
                 </Route>
                 <Route exact path="/myaccount">
                     <MyAccount 
-                    userId={userId}
+                    user={user}
                     />
                 </Route>
                 <Route exact path="/connections">
                     <Connections 
-                    userId={userId}
+                    user={user}
                     />
                 </Route>
                 <Route exact path="/pitches">
                     <Pitches 
-                    userId={userId}
+                    user={user}
                     />
                 </Route>
             </Switch>

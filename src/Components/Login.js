@@ -26,8 +26,10 @@ export default function Login(props) {
                 } else {
                     props.setLogInButtonPopup(!props.trigger)
                     props.setIsLoggedIn(!props.isLoggedIn)
+                    props.setUser(result.existingUser)
                     console.log("yawp")
                     console.log(result)
+                    console.log(result.existingUser)
                 }
             })
             
