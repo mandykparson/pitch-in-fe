@@ -38,6 +38,24 @@ export default function Pitches(props) {
             },
             body: JSON.stringify({ pitch: newPitch })
         })
+            .then(response => response.json())
+            .then(result => {
+                const user_id = props.user.id
+                const pitch_id = result.id;
+                const newUserPitch = { user_id: user_id, pitch_id: pitch_id}
+                
+
+                fetch('http://localhost:4000/user_pitches', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'accept': "application/json",
+                    },
+                    body: JSON.stringify({ user_pitch: newUserPitch })
+                })
+                .then(response => response.json())
+                .then(result => console.log(result))
+            })
     }
 
     return (formPopUp) ? (
