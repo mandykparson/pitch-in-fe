@@ -59,5 +59,5 @@ export default function Signup(props) {
                 </form>
             </div>
         </div>
-    ) : "";
+    ) : null;
 }

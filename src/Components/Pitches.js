@@ -61,9 +61,9 @@ export default function Pitches(props) {
     return (formPopUp) ? (
         <div className="popup">
             <div className="popup-inner">
-                <button className="close-btn" onClick={() => {setFormPopUp(!formPopUp)}}>X</button>
+                <button className="close-btn" onClick={togglePopUp}>X</button>
                 <h2>Create Pitch</h2>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit, togglePopUp}>
                     <input
                         type="text"
                         name="title"
