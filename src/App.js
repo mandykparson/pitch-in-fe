@@ -35,7 +35,7 @@ function App() {
   return (
       <Router>
         <div className="header">
-          <h2>Pitch In</h2>
+          <h3>Pitch In</h3>
           {isLoggedIn ? 
             <nav className="navBar">
               <button className="hamburger" onClick={handleToggle}>{navbarOpen ? 
