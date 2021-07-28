@@ -37,7 +37,9 @@ function App() {
         <div className="header">
           <h3>Pitch In</h3>
           {isLoggedIn ? 
-            <NavBar navbarOpen={navbarOpen} setNavbarOpen={setNavbarOpen}/>
+            <NavBar 
+              navbarOpen={navbarOpen} 
+              setNavbarOpen={setNavbarOpen}/>
             : <div className="login-signup-container">
                 <button id="login" onClick={() => {setLogInButtonPopup(!loginButtonPopup)}}>Login</button> 
                   <Login 
