@@ -5,6 +5,10 @@ export default function MyAccount(props) {
 
     const [ trigger, setTrigger ] = useState(false)
 
+    // const [ userBank, setUserBank ] = useState(props.user.bank)
+
+    const [ userID, setUserID ] = useState(props.user.id)
+
     const toggleTrigger = () => {
         setTrigger(!trigger)
     }
@@ -15,6 +19,23 @@ export default function MyAccount(props) {
         } else {
             return props.userBank
         }
+    }
+
+    const setBank = (bank) => {
+        fetch('http://localhost:4000/users/' + userID, 
+        {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'accept': "application/json",
+            },
+            body: JSON.stringify({ bank: bank })
+        }
+        )
+            .then(response => response.json())
+            .then(result => console.log(result))
+        console.log(bank)
+        toggleTrigger()
     }
 
     const renderPitches = () => {
@@ -28,11 +49,12 @@ export default function MyAccount(props) {
         })   
     }
 
-    const renderRadioBankButtons = () => {
+    const renderBankButtons = () => {
         return props.banks.map(bank => {
             return (
                 <div className="row">
-                    <button className="column" onClick={() => props.setUserBank(bank.name), toggleTrigger}>
+                    <button className="column"
+                    onClick={() => {setBank(bank.name)}}>
                         {bank.name}
                     </button>
                 </div>
@@ -50,7 +72,7 @@ export default function MyAccount(props) {
                             <h3>Select Your Bank</h3>
                         </div>
                     </div>
-                    { renderRadioBankButtons() }
+                    { renderBankButtons() }
                 </div>
             </div>
         </div>) 
