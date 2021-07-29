@@ -14,7 +14,7 @@ export default function NavBar(props) {
 
     return (
         <nav className="navBar">
-            <button onClick={ handleToggle }>{props.navbarOpen ? "Close" : "Open"}</button>
+            <button onClick={ handleToggle }>{props.navbarOpen ? "Close" : "Menu"}</button>
             <ul className={`menuNav ${props.navbarOpen ? " showMenu" : ""}`}>
                 <li>
                     <Link 

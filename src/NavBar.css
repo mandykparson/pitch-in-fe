@@ -1,21 +1,33 @@
+--root {
+    --first-color: #3EB595;
+    --second-color: #FFF447;
+    --thrid-color: #C9C9C9;
+    --forth-color: #696969;
+    --text-color: #1A1A1A;
+}
+
 .navBar {
     position: relative;
 }
 
 .navBar button {
     position: fixed;
-    right: 40px;
+    right: 20px;
     top: 40px;
     z-index: 10;
     cursor: pointer;
+    color: #3EB595;
+    border-color: #3EB595;
+    font-size: 13px;
 }
+
 
 .menuNav {
     overflow-y: scroll;
     list-style: none;
     position: fixed;
     top: 0;
-    background: darkcyan;
+    background: #1A1A1A;
     right: 0;
     bottom: 0;
     height: 100vh;
@@ -33,11 +45,15 @@ a {
     display: block;
     padding: 10px 40px;
     text-decoration: none;
-    color: #3fffd2;
+    color: #C9C9C9;
     text-transform: uppercase;
     font-weight: bold;
 }
 
+a:hover {
+    color:#3EB595
+}
+
 .menuNav li:first-child {
-    margin-top: 7rem;
+    margin-top: 10rem;
 }
