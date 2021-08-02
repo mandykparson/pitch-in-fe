@@ -10,8 +10,6 @@ import {
   Route,
   Switch
 } from 'react-router-dom'
-import { MdClose } from "react-icons/md"
-import { FiMenu } from "react-icons/fi"
 import Login from './Components/Login'
 import SignUp from './Components/SignUp'
 import NavBar from './Components/NavBar'
@@ -25,6 +23,7 @@ function App() {
   const [user, setUser] = useState({})
   const [userBank, setUserBank] = useState('')
   const [banks, setBanks] = useState([])
+  const [total, setTotal] = useState(1000)
 
   useEffect(() => {
     fetch('http://localhost:4000/banks')
@@ -58,7 +57,7 @@ function App() {
           </div>
         <div className="main-content">
             <Switch>
-                <Route exact path="/home">
+                <Route exact path="/">
                     <Homepage 
                       user={user}
                     />
@@ -69,6 +68,7 @@ function App() {
                     userBank={userBank}
                     setUserBank={setUserBank}
                     banks={banks}
+                    total={total}
                     />
                 </Route>
                 <Route exact path="/connections">
@@ -79,6 +79,7 @@ function App() {
                 <Route exact path="/pitches">
                     <Pitches 
                     user={user}
+                    total={total}
                     />
                 </Route>
             </Switch>

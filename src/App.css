@@ -6,22 +6,51 @@
   --text-color: #1A1A1A;
 }
 
+/* add this https://docs.google.com/drawings/d/e/2PACX-1vTOHFIO42Zs1S08bTBa4XpA_hJ4pl_t2iKif1g67KqW15Mqhz_KMv2FXl1YhBfuuiI897XfoXhpfYbP/pub?w=673&h=842 */
+
 
 .header {
-  display: flex;
+  position: fixed;
+  top: 0;
   justify-content: space-between;
   padding: 2rem;
-  padding-top: 3rem;
+  z-index: 10;
+  background-color: white;
+  width:90%;
+  height: 5vh;
+  margin: 0px;
 }
 
-
 .login-signup-container {
-  display: flex;
-  justify-content: space-around;
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  z-index: 10;
 }
 
 button#login {
   border: none;
+}
+
+.pitches .pitch-card{
+  display: flex;
+  margin: 2rem;
+  padding: 1rem;
+}
+
+.homepage, .myaccount, .pitches, .selection{
+  margin-top: 12vh;
+}
+
+.homepage {
+  background-image: url('https://docs.google.com/drawings/d/e/2PACX-1vTOHFIO42Zs1S08bTBa4XpA_hJ4pl_t2iKif1g67KqW15Mqhz_KMv2FXl1YhBfuuiI897XfoXhpfYbP/pub?w=673&h=842');
+  background-size: cover;
+  overflow: hidden;
+  height: 100vh;
+}
+
+img {
+  max-width: 100%;
 }
 
 /* Grid */

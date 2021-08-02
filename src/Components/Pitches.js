@@ -1,6 +1,7 @@
 import React from 'react'
 import PitchCard from './PitchCard'
 import { useState } from 'react'
+import Selection from './Selection'
 
 
 export default function Pitches(props) {
@@ -10,7 +11,8 @@ export default function Pitches(props) {
     const [ description, setDescription] = useState('')
     const [ image, setImage ] = useState('')
     const [ total, setTotal ] = useState(0)
-    const [ pitchesURL ] = useState('http://localhost:4000/pitches')
+    const [ pitchesURL ] = useState('http://localhost:4000/pitches/')
+    const [ selection, setSelection ] = useState('')
 
     const togglePopUp = () => {
         setFormPopUp(!formPopUp)
@@ -18,7 +20,7 @@ export default function Pitches(props) {
 
     const renderPitchCards = () => {
         return props.user.pitches.map(pitch => {
-            return <PitchCard key={pitch.title} pitch={pitch}/>
+            return <PitchCard selection={selection} setSelection={setSelection} key={pitch.title} pitch={pitch}/>
         })
     }
 
@@ -30,7 +32,7 @@ export default function Pitches(props) {
             image: image,
             total: total
         }
-        fetch('http://localhost:4000/pitches', {
+        fetch(pitchesURL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -97,9 +99,21 @@ export default function Pitches(props) {
             </div>
         </div>) 
         : 
-        <div className="container">
-            {props.user.pitches ? renderPitchCards()
-            : "" }
-            <button onClick={togglePopUp}>Create Pitch</button> 
-        </div>;
+        (selection) ? (
+            <Selection 
+                selection={selection}
+                setSelection={setSelection}
+                total={props.total}
+                user={props.user}/>
+        )
+        :
+        (<div className="pitches">
+            <div className="container">
+                {props.user.pitches ? renderPitchCards()
+                : null }
+                <div className="row">
+                        <button className="column" onClick={togglePopUp}>Create Pitch</button> 
+                </div>
+            </div>
+        </div>)
 }

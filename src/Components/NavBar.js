@@ -18,7 +18,7 @@ export default function NavBar(props) {
             <ul className={`menuNav ${props.navbarOpen ? " showMenu" : ""}`}>
                 <li>
                     <Link 
-                        to="/home"
+                        to="/"
                         activeClassName="active-link"
                         onClick={() => closeMenu()}
                         exact> 

@@ -33,8 +33,6 @@
     right: 20px;
     border-style: none;
     background-color: transparent;
-    color: white;
-
 }
 
 .popup input[type=text], .popup input[type=password] {
@@ -56,3 +54,17 @@
     border-color: #C9C9C9;
 }
 
+.my-account h3{
+    color: white;
+}
+
+.selection h3 {
+    color: white;
+}
+
+.my-account button {
+    color: white;
+}
+.my-account button:hover {
+    color: #3EB595;
+}
