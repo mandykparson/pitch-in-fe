@@ -1,15 +1,20 @@
 import { useState, useEffect } from 'react'
+import Request from './Request'
 
 export default function Selection(props) {
     const [ trigger, setTrigger ] = useState(false)
-    const [ fakeTot, setFakeTot ] = useState(4000)
+    const [ fakeTot ] = useState(4000)
     const [ description, setDescription ] = useState('')
     const [ amount, setAmount ] = useState('')
     const [ requests, setRequests ] = useState('')
+    const [ requestURL ] = useState('http://localhost:4000/requests')
+    const [ newFakeTot, setNewFakeTot ] = useState(fakeTot)
 
-    const postRequest = (request) => {
-        console.log(request)
-    }
+    useEffect(() => {
+        fetch(requestURL)
+            .then(response => response.json())
+            .then(requestApi => setRequests(requestApi))
+    }, [])
 
     const toggleTrigger = () => {
         setTrigger(!trigger)
@@ -32,9 +37,21 @@ export default function Selection(props) {
             body: JSON.stringify({ request: newRequest})
         }
 
-        fetch('http://localhost:4000/requests',options)
+        fetch(requestURL, options)
             .then(response => response.json())
             .then(result => {console.log(result)})
+
+        toggleTrigger()
+        renderRequests()
+    }
+ 
+    const renderRequests = () => {
+        if (requests.length) {
+            return requests.map(request => {
+                return <Request request={request}
+                newFakeTot={newFakeTot}setNewFakeTot={setNewFakeTot}/>
+            })
+        } else { return "No Requests Made"}
     }
 
     return (trigger) ? 
@@ -48,7 +65,7 @@ export default function Selection(props) {
                                 <h3>My Request</h3>
                             </div>
                         </div>
-                        <form onSubmit={ handleSubmit }>
+                        <form onSubmit={ renderRequests,handleSubmit }>
                             <div className="row">
                                 <div className="column">
                                     <input
@@ -90,9 +107,13 @@ export default function Selection(props) {
                     <h4>Available Funds</h4>
                 </div>
                 <div className="row">
-                    <h4>${fakeTot}</h4>
-                    <p>You Contributed: ${props.total}</p>
+                    <h4>${newFakeTot}.00</h4>
+                    <p><em>You Contributed: ${props.total}.00</em></p>
                 </div>
+                <div className="row">
+                    <h4>Requests</h4>
+                </div>
+                    { renderRequests()}
                 <div className="row">
                     <button className="column" onClick={ toggleTrigger }>Request Funds</button>
                 </div>
