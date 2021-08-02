@@ -6,6 +6,7 @@ export default function MyAccount(props) {
     const [ trigger, setTrigger ] = useState(false)
 
     // const [ userBank, setUserBank ] = useState(props.user.bank)
+    // const [ secondTrigger, setSecondTrigger ] = useState(false)
 
     const [ userID, setUserID ] = useState(props.user.id)
 
@@ -17,25 +18,43 @@ export default function MyAccount(props) {
         if (props.userBank === '') {
             return "No Bank Linked"
         } else {
-            return props.userBank
+            return (
+                <div>
+                    <div> 
+                        <p>{props.userBank}</p>
+                    </div>
+                    <div className="row">
+                        <h4>Total in Checking: ${props.total}</h4>
+                    </div>
+                </div>
+
+            )
         }
     }
 
-    const setBank = (bank) => {
-        fetch('http://localhost:4000/users/' + userID, 
-        {
+    const patchBank = (bank) => {
+        // fetch('http://localhost:4000/users/' + userID)
+        //     .then(response => response.json())
+        //     .then(result => console.log(result))
+        //     .catch(err => {
+        //         console.log("error reading data " + err)
+        //     })  
+        const options = {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
-                'accept': "application/json",
+                'Accept': 'application/json',
             },
             body: JSON.stringify({ bank: bank })
         }
-        )
+        fetch('http://localhost:4000/users/' + userID, options)
             .then(response => response.json())
             .then(result => console.log(result))
-        console.log(bank)
+            .catch(err => {
+                console.log("error reading data " + err)
+            })
         toggleTrigger()
+        props.setUserBank(bank)
     }
 
     const renderPitches = () => {
@@ -54,7 +73,7 @@ export default function MyAccount(props) {
             return (
                 <div className="row">
                     <button className="column"
-                    onClick={() => {setBank(bank.name)}}>
+                    onClick={() => {patchBank(bank.name)}}>
                         {bank.name}
                     </button>
                 </div>
@@ -63,33 +82,36 @@ export default function MyAccount(props) {
     }
 
     return (trigger) ? (
-        <div className="popup">
-            <div className="popup-inner">
-                <button className="close-btn" onClick={() => {setTrigger(!trigger)}}>X</button>
-                <div className="container">
-                    <div className="row">
-                        <div className="column">
-                            <h3>Select Your Bank</h3>
+        <div className="my-account">
+            <div className="popup">
+                <div className="popup-inner">
+                    <button className="close-btn" onClick={() => {setTrigger(!trigger)}}>X</button>
+                    <div className="container">
+                        <div className="row">
+                            <div className="column">
+                                <h3>Select Your Bank</h3>
+                            </div>
                         </div>
+                        { renderBankButtons() }
                     </div>
-                    { renderBankButtons() }
                 </div>
             </div>
-        </div>) 
-        :
-        (<div className="container">
-                <h2>Account Settings</h2>
-                <div className="row">
-                    <p><strong>Your Name: </strong>{props.user.username}</p>
-                </div>
-                <div className="row">
-                    <p><strong>Your Pitches: </strong> { renderPitches() }</p>
-                </div>
-                <div className="row">
-                    <div className="two-thirds column">
-                    <p><strong>Your Current Bank: </strong> { renderBankCard() }</p>
+        </div>) :
+        (<div className="myaccount">
+            <div className="container">
+                    <h2>Account Settings</h2>
+                    <div className="row">
+                        <p><strong>Your Name: </strong>{props.user.username}</p>
                     </div>
-                    <button className="one-third column" onClick={ toggleTrigger }>Add Bank</button>
-                </div>
-            </div>) ;
+                    <div className="row">
+                        <p><strong>Your Pitches: </strong> { renderPitches() }</p>
+                    </div>
+                    <div className="row">
+                        <div className="two-thirds column">
+                        <p><strong>Your Current Bank: </strong> { renderBankCard() }</p>
+                        </div>
+                        <button className="one-third column" onClick={ toggleTrigger }>Add Bank</button>
+                    </div>
+            </div>
+        </div>) ;
 }
