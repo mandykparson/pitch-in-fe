@@ -1,14 +1,9 @@
-import React from 'react'
 import { useState } from 'react'
 
 export default function MyAccount(props) {
 
     const [ trigger, setTrigger ] = useState(false)
-
-    // const [ userBank, setUserBank ] = useState(props.user.bank)
-    // const [ secondTrigger, setSecondTrigger ] = useState(false)
-
-    const [ userID, setUserID ] = useState(props.user.id)
+    const [ userID ] = useState(props.user.id)
 
     const toggleTrigger = () => {
         setTrigger(!trigger)
@@ -27,18 +22,11 @@ export default function MyAccount(props) {
                         <h4>Total in Checking: ${props.total}</h4>
                     </div>
                 </div>
-
             )
         }
     }
 
     const patchBank = (bank) => {
-        // fetch('http://localhost:4000/users/' + userID)
-        //     .then(response => response.json())
-        //     .then(result => console.log(result))
-        //     .catch(err => {
-        //         console.log("error reading data " + err)
-        //     })  
         const options = {
             method: 'PATCH',
             headers: {
@@ -62,7 +50,6 @@ export default function MyAccount(props) {
             return (
                 <div className="row">
                     <p className="two-thirds column">{pitch.title}</p>
-                    <button className="one-third column">Edit</button>
                 </div>
             )
         })   
