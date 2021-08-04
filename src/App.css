@@ -12,11 +12,12 @@
 .header {
   position: fixed;
   top: 0;
+  left: 0;
   justify-content: space-between;
   padding: 2rem;
   z-index: 10;
   background-color: white;
-  width:90%;
+  width:100%;
   height: 5vh;
   margin: 0px;
 }
@@ -43,15 +44,17 @@ button#login {
 }
 
 .homepage {
-  background-image: url('https://docs.google.com/drawings/d/e/2PACX-1vTOHFIO42Zs1S08bTBa4XpA_hJ4pl_t2iKif1g67KqW15Mqhz_KMv2FXl1YhBfuuiI897XfoXhpfYbP/pub?w=673&h=842');
+  background-image: url('https://docs.google.com/drawings/d/e/2PACX-1vTOHFIO42Zs1S08bTBa4XpA_hJ4pl_t2iKif1g67KqW15Mqhz_KMv2FXl1YhBfuuiI897XfoXhpfYbP/pub?w=763&h=633');
   background-size: cover;
   overflow: hidden;
   height: 100vh;
 }
 
-img {
-  max-width: 100%;
-}
+/* img {
+  min-width: 400px;
+  min-height: 350px;
+  object-fit: cover;
+} */
 
 /* Grid */
 .container {

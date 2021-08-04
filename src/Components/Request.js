@@ -16,7 +16,10 @@ export default function Requests(props) {
             {isDisabled ? (
                 <p className="one column"><strong>PURCHASED</strong></p>
             ) : (
-                <button disabled={isDisabled}className="three columns" onClick={() => handleClick(props.newFakeTot, props.request.amount)}>Buy</button>
+                <button 
+                    disabled={isDisabled} 
+                    className="three columns" 
+                    onClick={() => handleClick(props.newFakeTot, props.request.amount)}>Buy</button>
             )}
         </div>
     )
