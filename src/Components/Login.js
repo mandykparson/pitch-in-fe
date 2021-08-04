@@ -1,35 +1,34 @@
-import React from 'react'
 import { useState } from 'react'
 import "../Popup.css"
 
 export default function Login(props) {
 
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+    const [ username, setUsername ] = useState('')
+    const [ password, setPassword ] = useState('')
+    const [ loginURL ] = useState('http://localhost:4000/login')
+    const [ error, setError ] = useState('')
 
     const handleSubmit = event => {
         event.preventDefault();
-
-        fetch('http://localhost:4000/login', {
+        const options = {
             method: 'POST',
             headers: {
                 'accept': 'application/json',
                 'content-type': 'application/json'
             },
             body: JSON.stringify({user: {username, password}})
-        })
+        }
+
+        fetch(loginURL, options)
             .then(res => res.json())
             .then(result => {
                 if (result.error) {
-                    console.log("nawp")
-                    console.log(result)
+                    setError(result.error)
                 } else {
                     props.setLogInButtonPopup(!props.trigger)
                     props.setIsLoggedIn(!props.isLoggedIn)
                     props.setUser(result.existingUser)
-                    console.log("yawp")
-                    console.log(result)
-                    console.log(result.existingUser)
+                    setError('')
                 }
             })
             
@@ -57,6 +56,7 @@ export default function Login(props) {
                         onChange={event => setPassword(event.target.value)}
                     />
                     <input type="submit" value="Log In"/>
+                    {error ? <p style={{color: "white"}}>{error}</p> : null}
                 </form>
             </div>
         </div>

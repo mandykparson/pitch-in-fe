@@ -8,13 +8,21 @@ export default function Selection(props) {
     const [ amount, setAmount ] = useState('')
     const [ requests, setRequests ] = useState('')
     const [ requestURL ] = useState('http://localhost:4000/requests')
+    const [ users, setUsers ] = useState([])
+    const [ friends, setFriends ] = useState([])
+    const [ usersURL ] = useState('http://localhost:4000/users')
     const [ newFakeTot, setNewFakeTot ] = useState(fakeTot)
 
     useEffect(() => {
         fetch(requestURL)
             .then(response => response.json())
             .then(requestApi => setRequests(requestApi))
+        
+        fetch(usersURL)
+            .then(response => response.json())
+            .then(usersApi => setUsers(usersApi))
     }, [])
+
 
     const toggleTrigger = () => {
         setTrigger(!trigger)
@@ -42,6 +50,7 @@ export default function Selection(props) {
             .then(result => {console.log(result)})
 
         toggleTrigger()
+        setRequests([...requests, newRequest])
         renderRequests()
     }
  
@@ -52,6 +61,19 @@ export default function Selection(props) {
                 newFakeTot={newFakeTot}setNewFakeTot={setNewFakeTot}/>
             })
         } else { return "No Requests Made"}
+    }
+
+    const findFriends = () => {
+        const foundFriends = users.filter(user => {
+            return user.length > 3
+        })
+        setFriends(foundFriends)
+    }
+
+    const renderFriends = () => {
+        return users.map(friend => {
+            return <li>{friend.username}</li>
+        })
     }
 
     return (trigger) ? 
@@ -101,6 +123,9 @@ export default function Selection(props) {
                 <hr></hr>
                 <div className="row">
                     <h4>Friends on this Pitch</h4>
+                        <ul>
+                            { renderFriends() }
+                        </ul>
                 </div>
                 <hr></hr>
                 <div className="row">

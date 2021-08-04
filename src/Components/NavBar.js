@@ -1,4 +1,3 @@
-import React from 'react'
 import '../NavBar.css'
 import { Link } from 'react-router-dom'
 
@@ -32,15 +31,6 @@ export default function NavBar(props) {
                         onClick={() => closeMenu()}
                         exact> 
                             My Account
-                    </Link>
-                </li>
-                <li>
-                    <Link 
-                        to="/connections"
-                        activeClassName="active-link"
-                        onClick={() => closeMenu()}
-                        exact>
-                            Connections
                     </Link>
                 </li>
                 <li>
