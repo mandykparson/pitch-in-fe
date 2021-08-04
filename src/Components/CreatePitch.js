@@ -50,7 +50,7 @@ export default function CreatePitch(props) {
         props.togglePopUp()
     }
 
-    return (
+    return (props.formPopUp) ? (
         <div className="popup">
             <div className="popup-inner">
                 <button className="close-btn" onClick={props.togglePopUp}>X</button>
@@ -87,6 +87,5 @@ export default function CreatePitch(props) {
                     <input type="submit" value="Create"/>
                 </form>
             </div>
-        </div>
-    )
+        </div>) : null;
 }

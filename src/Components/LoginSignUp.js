@@ -22,5 +22,5 @@ export default function LoginSignUp(props) {
                 trigger={signupButtonPopup} 
                 setSignUpButtonPopup={setSignUpButtonPopup}/>
         </div>
-    )
+    ) 
 }
